@@ -1,15 +1,15 @@
 # 2020.1.10 ABC150 C
-import math
+import itertools
 N = int(input())
 P = list(map(int, input().split()))
 Q = list(map(int, input().split()))
-m = math.factorial(N)
-def calc_bango(lst):
-  ban = 0
-  for i in range(N):
-    ban += lst[i]*math.factorial(N-i-1)  
-  return(ban)
 
-a = calc_bango(P)
-b = calc_bango(Q)
+def count_junretsu(retsu):
+	# 大きさNの順列を辞書順に作成し、順番にP,Qと比較する
+	for i,l in enumerate(itertools.permutations(range(1,N+1))):
+		if retsu == list(l):
+			return(i+1)
+
+a = count_junretsu(P)
+b = count_junretsu(Q)
 print(abs(a-b))
